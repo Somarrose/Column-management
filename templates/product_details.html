@@ -1,0 +1,21 @@
+<h1>Product Details</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Supplier</th>
+                <th>Dimension</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for column in columns %}
+            <tr>
+                <td>{{ column.sn }}</td>
+                <td>{{ column.supplier }}</td>
+                <td>{{ column.dimension }}</td>
+                <td>{{ column.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

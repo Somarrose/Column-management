@@ -1,0 +1,29 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<h1>Last Product Usage</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Column Serial Number</th>
+                <th>Project</th>
+                <th>Technique</th>
+                <th>Mobile Phase A</th>
+                <th>Mobile Phase B</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usage in last_usages %}
+            <tr>
+                <td>{{ usage.column.sn }}</td>
+                <td>{{ usage.project }}</td>
+                <td>{{ usage.technique }}</td>
+                <td>{{ usage.mobile_phase_a }}</td>
+                <td>{{ usage.mobile_phase_b }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

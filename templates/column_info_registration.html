@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+    <h1>Column Information Registration</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ printPlaceholder(form.sn) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.supplier) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.dimension) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.date) }}
+        </div>
+
+        {{ form.submit(class_="btn  btn-primary") }}
+    </form>
+{% endblock content %}

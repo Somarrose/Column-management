@@ -1,0 +1,39 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+    <h1>Usage Entry Form</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ printPlaceholder(form.user_id) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.column_id) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.project) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.technique) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.mobile_phase_a) }}
+        </div>
+
+        <div>
+            {{ printPlaceholder(form.mobile_phase_b) }}
+        </div>
+
+        {{ form.submit(class_="btn  btn-primary") }}
+    </form>
+
+{% endblock content %}
+
+
