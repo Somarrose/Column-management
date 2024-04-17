@@ -1,8 +1,4 @@
-{% extends 'layout/base.html' %}
-
-
-{% block content %}
-    <h1>Column Information Registration</h1>
+<h1 class="text-dark">Column Information Registration</h1>
     <form method="POST">
         {{ form.hidden_tag() }}
 
@@ -22,6 +18,5 @@
             {{ printPlaceholder(form.date) }}
         </div>
 
-        {{ form.submit(class_="btn  btn-primary") }}
+        {{ form.submit(class_="btn  btn-primary mt-4") }}
     </form>
-{% endblock content %}

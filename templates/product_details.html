@@ -1,4 +1,9 @@
-<h1>Product Details</h1>
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<h1 class="text-dark">Product Details</h1>
     <table class="table">
         <thead>
             <tr>
@@ -19,3 +24,4 @@
             {% endfor %}
         </tbody>
     </table>
+{% endblock content %}

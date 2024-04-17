@@ -1,14 +1,20 @@
-    
+
+<h1 class="text-dark pb-4">User Registration</h1>
     <form method="POST">
-    {{ form.hidden_tag() }}
-
+    {{ Userform.hidden_tag() }}
         <div>
-            {{ form.name.label }}
-            {{ form.name(class="form-control") }}
-            {% for error in form.name.errors %}
-                <span class="text-danger">{{ error }}</span>
-            {% endfor %}
-        </div>
+            <div class="col-md-12">
+                <div>
+                    {{ printPlaceholder(Userform.name) }}
+                </div>
+                <br>
+                <div>
+                    {{ printPlaceholder(Userform.employee_id) }}                        
+                </div>
+            </div>
 
-        {{ form.submit(class_="btn btn-primary") }}
+            <div class="col-12 col-md-12 mt-4 mx-auto">
+                {{ Userform.submit(class_="btn btn-primary") }}
+            </div>
+        </div>
     </form>

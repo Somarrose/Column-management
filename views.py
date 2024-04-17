@@ -35,14 +35,16 @@ def usage_entry():
         return redirect(url_for('register_user'))
     return render_template('usage_entry.html', form=form)
 
-@app.route('/register_user', methods=['GET', 'POST'])
-def register_user():
-    form = UserForm()
+@app.route('/')
+@app.route('/index')
+@app.route('/registration', methods=['GET', 'POST'])
+def registration():
+    Userform = UserForm()
 
-    if form.validate_on_submit():
+    if Userform.validate_on_submit():
         # If the form is submitted and validated, process the data
-        name = form.name.data
-        employee_id = form.employee_id.data
+        name = Userform.name.data
+        employee_id = Userform.employee_id.data
 
         # Create a new User object and add it to the database
         user = User(name=name, employee_id=employee_id)
@@ -51,13 +53,8 @@ def register_user():
 
         # Redirect to a success page or another route
         flash('User Entry Successful!', 'success')
-        return redirect(url_for('register_user'))
-
-    # If the form is not submitted or is invalid, render the form template
-    return render_template('user_registration.html', form=form)
-
-@app.route('/register_column_info', methods=['GET', 'POST'])
-def register_column_info():
+        return redirect(url_for('registration'))
+    
     form = ColumnInfoForm()
 
     if form.validate_on_submit():
@@ -74,10 +71,10 @@ def register_column_info():
 
         # Redirect to a success page or another route
         flash('Column Registration Successful!', 'success')
-        return redirect(url_for('register_user'))
+        return redirect(url_for('registration'))
+    
+    return render_template('Registration.html', Userform=Userform, form=form)
 
-    # If the form is not submitted or is invalid, render the form template
-    return render_template('column_info_registration.html', form=form)
 
 @app.route('/product_details')
 def product_details():
@@ -95,46 +92,3 @@ def last_product_usage():
             last_usages.append(last_usage)
     return render_template('last_product_usage.html', last_usages=last_usages)
 
-
-## temp routes
-
-@app.route('/index')
-def index():
-    return render_template('home/index.html', segment='index')
-
-
-@app.route('/<template>')
-def route_template(template):
-
-    try:
-
-        if not template.endswith('.html'):
-            template += '.html'
-
-        # Detect the current page
-        segment = get_segment(request)
-
-        # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
-
-    except TemplateNotFound:
-        return render_template('home/page-404.html'), 404
-
-    except:
-        return render_template('home/page-500.html'), 500
-
-
-# Helper - Extract current page name from request
-def get_segment(request):
-
-    try:
-
-        segment = request.path.split('/')[-1]
-
-        if segment == '':
-            segment = 'index'
-
-        return segment
-
-    except:
-        return None

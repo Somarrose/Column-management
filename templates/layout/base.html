@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usage Entry Form</title>
+
+    <!-- Fontawesome -->
+    <link type="text/css" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Pixel CSS -->
+    <link type="text/css" href="/static/assets/css/pixel.css" rel="stylesheet">
 </head>
 
 {% macro printPlaceholder(field) %}
-        {{ field.label }}
+        {{ field.label(class="text-dark px-3 my-auto") }}
         {{ field(class="form-control") }}
         {% for error in field.errors %}
             <span class="text-danger">{{ error }}</span>
@@ -25,8 +31,23 @@
   {% endif %}
 {% endwith %}
 
-<body>
-    {% block content %}
-    {% endblock content %}
+<body style="background-color: #242e4c !important;">
+  {% include 'includes/navigation.html' %}
+  <main>
+    <div class="section-header bg-primary text-white">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 d-flex card shadow align-items-center justify-content-center">
+            <div class="card-body w-100 px-5 py-5 text-center text-md-left">
+              {% block content %}
+              {% endblock content %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  {% include 'includes/scripts.html' %}
+
 </body>
 </html>
