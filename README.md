@@ -13,5 +13,5 @@ The code uses pipenv for dependency management.
 > flask db init
 > flask db upgrade
 
-3. Once the environment has been activated. The app can be run by simply typing:
+4. Once the environment has been activated. The app can be run by simply typing:
 > flask run
