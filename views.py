@@ -1,7 +1,8 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from app import app, db
 from models import User, ColumnInfo, UsageEntry
 from forms import UsageEntryForm, UserForm, ColumnInfoForm
+from jinja2 import TemplateNotFound
 
 @app.route('/usage_entry', methods=['GET', 'POST'])
 def usage_entry():
@@ -41,9 +42,10 @@ def register_user():
     if form.validate_on_submit():
         # If the form is submitted and validated, process the data
         name = form.name.data
+        employee_id = form.employee_id.data
 
         # Create a new User object and add it to the database
-        user = User(name=name)
+        user = User(name=name, employee_id=employee_id)
         db.session.add(user)
         db.session.commit()
 
@@ -92,3 +94,47 @@ def last_product_usage():
         if last_usage:
             last_usages.append(last_usage)
     return render_template('last_product_usage.html', last_usages=last_usages)
+
+
+## temp routes
+
+@app.route('/index')
+def index():
+    return render_template('home/index.html', segment='index')
+
+
+@app.route('/<template>')
+def route_template(template):
+
+    try:
+
+        if not template.endswith('.html'):
+            template += '.html'
+
+        # Detect the current page
+        segment = get_segment(request)
+
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template("home/" + template, segment=segment)
+
+    except TemplateNotFound:
+        return render_template('home/page-404.html'), 404
+
+    except:
+        return render_template('home/page-500.html'), 500
+
+
+# Helper - Extract current page name from request
+def get_segment(request):
+
+    try:
+
+        segment = request.path.split('/')[-1]
+
+        if segment == '':
+            segment = 'index'
+
+        return segment
+
+    except:
+        return None

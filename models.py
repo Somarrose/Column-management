@@ -3,7 +3,7 @@ from extensions import db
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    employee_id = db.column(db.integer, nullable=False, unique=True)
+    employee_id = db.Column(db.Integer, nullable=False, unique=True)
 
 class ColumnInfo(db.Model):
     sn = db.Column(db.Integer, primary_key=True)

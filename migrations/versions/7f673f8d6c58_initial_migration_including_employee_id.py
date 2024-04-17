@@ -1,8 +1,8 @@
-"""Initial migration.
+"""initial migration including employee id
 
-Revision ID: e4af29793b6d
+Revision ID: 7f673f8d6c58
 Revises: 
-Create Date: 2024-04-15 13:29:59.742863
+Create Date: 2024-04-17 20:06:21.735614
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e4af29793b6d'
+revision = '7f673f8d6c58'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,12 +23,14 @@ def upgrade():
     sa.Column('supplier', sa.String(length=100), nullable=False),
     sa.Column('dimension', sa.String(length=100), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
-    sa.PrimaryKeyConstraint('sn')
+    sa.PrimaryKeyConstraint('sn', name=op.f('pk_column_info'))
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('employee_id', sa.Integer(), nullable=False),
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_user')),
+    sa.UniqueConstraint('employee_id', name=op.f('uq_user_employee_id'))
     )
     op.create_table('usage_entry',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -38,9 +40,9 @@ def upgrade():
     sa.Column('technique', sa.String(length=100), nullable=False),
     sa.Column('mobile_phase_a', sa.String(length=100), nullable=True),
     sa.Column('mobile_phase_b', sa.String(length=100), nullable=True),
-    sa.ForeignKeyConstraint(['column_id'], ['column_info.sn'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.ForeignKeyConstraint(['column_id'], ['column_info.sn'], name=op.f('fk_usage_entry_column_id_column_info')),
+    sa.ForeignKeyConstraint(['user_id'], ['user.id'], name=op.f('fk_usage_entry_user_id_user')),
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_usage_entry'))
     )
     # ### end Alembic commands ###
 
