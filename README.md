@@ -9,5 +9,9 @@ The code uses pipenv for dependency management.
 2. To activate the environment after successful installation of dependencies. Type:
 > pipenv shell
 
+3. If the app is being run for the first time the database will also need to be initialized. To properly initialize run:
+> flask db init
+> flask db upgrade
+
 3. Once the environment has been activated. The app can be run by simply typing:
 > flask run

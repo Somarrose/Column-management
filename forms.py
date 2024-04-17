@@ -1,10 +1,19 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SubmitField, SelectField
-from wtforms.validators import DataRequired, Length
+from wtforms.validators import DataRequired, Length, ValidationError
+from models import User
+
 
 class UserForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(max=100)])
+    employee_id = StringField('Employee ID', validators=[DataRequired()])
     submit = SubmitField('Submit')
+    def validate_employee_id(form, field):
+        if not field.raw_data:
+            number = User.query.filter_by(emergency_number=form.field.data).first()
+            if number:
+                raise ValidationError('Employee ID must be unique')
+        raise ValidationError('Employee ID cannot be blank')
 
 class ColumnInfoForm(FlaskForm):
     sn = StringField('Serial Number', validators=[DataRequired(), Length(max=50)])
