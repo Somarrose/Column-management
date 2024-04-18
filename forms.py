@@ -32,7 +32,7 @@ class ColumnInfoForm(FlaskForm):
 
 class UsageEntryForm(FlaskForm):
     user_id = SelectField('User', coerce=int, validators=[DataRequired()])
-    column_id = SelectField('Column', coerce=int, validators=[DataRequired()])
+    column_id = SelectField('Column', validators=[DataRequired()])
     project = StringField('Project', validators=[DataRequired(), Length(max=100)])
     technique = StringField('Technique', validators=[DataRequired(), Length(max=100)])
     mobile_phase_a = StringField('Mobile Phase A', validators=[DataRequired(), Length(max=100)])

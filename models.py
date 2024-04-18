@@ -14,7 +14,7 @@ class ColumnInfo(db.Model):
 class UsageEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    column_id = db.Column(db.Integer, db.ForeignKey('column_info.sn'), nullable=False)
+    column_id = db.Column(db.String(100), db.ForeignKey('column_info.sn'), nullable=False)
     project = db.Column(db.String(100), nullable=False)
     technique = db.Column(db.String(100), nullable=False)
     mobile_phase_a = db.Column(db.String(100), default=False)

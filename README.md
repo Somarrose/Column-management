@@ -15,3 +15,15 @@ The code uses pipenv for dependency management.
 
 4. Once the environment has been activated. The app can be run by simply typing:
 > flask run
+
+
+## Run code through Docker
+1. To build the Dockerfile. Run:
+> docker build -t my-flask-app .
+
+where my-flask-app can also be replaced by any other name of your choosing
+
+2. To run the image. Run:
+> docker run -d -p 5000:5000 my-flask-app
+
+The name of the name of the image (my-flask-app) should match name provided in step 1 above

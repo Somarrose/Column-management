@@ -32,9 +32,9 @@ def usage_entry():
         db.session.commit()
         # Redirect to a success page or another route
         flash('Usage Entry Successful!', 'success')
-        return redirect(url_for('register_user'))
+        return redirect(url_for('registration'))
     return render_template('usage_entry.html', form=form)
-
+    
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/registration', methods=['GET', 'POST'])
