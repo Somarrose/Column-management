@@ -32,7 +32,7 @@ WORKDIR /home/appuser
 
 # Install application into container
 COPY . .
-COPY entrypoint.sh /home/appuser
+# COPY entrypoint.sh /home/appuser
 
 # Define environment variable
 ENV FLASK_APP=app.py
