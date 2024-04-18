@@ -10,7 +10,7 @@ The code uses pipenv for dependency management.
 > pipenv shell
 
 3. If the app is being run for the first time the database will also need to be initialized. To properly initialize run:
-> flask db init
+
 > flask db upgrade
 
 4. Once the environment has been activated. The app can be run by simply typing:

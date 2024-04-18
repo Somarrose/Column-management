@@ -6,7 +6,7 @@ class User(db.Model):
     employee_id = db.Column(db.Integer, nullable=False, unique=True)
 
 class ColumnInfo(db.Model):
-    sn = db.Column(db.Integer, primary_key=True)
+    sn = db.Column(db.String(100), primary_key=True)
     supplier = db.Column(db.String(100), nullable=False)
     dimension = db.Column(db.String(100), nullable=False)
     date = db.Column(db.Date, nullable=False)

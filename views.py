@@ -35,8 +35,8 @@ def usage_entry():
         return redirect(url_for('register_user'))
     return render_template('usage_entry.html', form=form)
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     Userform = UserForm()

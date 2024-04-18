@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
-from models import User
+from models import User, ColumnInfo
 
 
 class UserForm(FlaskForm):
@@ -22,6 +22,13 @@ class ColumnInfoForm(FlaskForm):
     dimension = StringField('Dimension', validators=[DataRequired(), Length(max=100)])
     date = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
+    def validate_sn(self, field):
+        if field.data:
+            column = ColumnInfo.query.filter_by(sn=field.data).first()
+            if column:
+                raise ValidationError('Employee ID must be unique')
+        else:
+            raise ValidationError('Employee ID cannot be blank')
 
 class UsageEntryForm(FlaskForm):
     user_id = SelectField('User', coerce=int, validators=[DataRequired()])

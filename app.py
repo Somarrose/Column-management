@@ -1,10 +1,12 @@
 from flask import Flask
 from extensions import migrate, db
+import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 config = {
     "DEBUG": True,          # some Flask specific configs
-    "SQLALCHEMY_DATABASE_URI":'sqlite:///db.sqlite3',
+    "SQLALCHEMY_DATABASE_URI":"sqlite:///"+os.path.join(basedir, "db.sqlite3"),
     'SECRET_KEY':'super secret key'
 }
 
