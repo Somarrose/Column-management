@@ -7,9 +7,10 @@ class User(db.Model):
 
 class ColumnInfo(db.Model):
     sn = db.Column(db.String(100), primary_key=True)
+    reference = db.Column(db.String(100), nullable=False, unique=True)
     supplier = db.Column(db.String(100), nullable=False)
     dimension = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.Date, nullable=False)
+    
 
 class UsageEntry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,6 +20,7 @@ class UsageEntry(db.Model):
     technique = db.Column(db.String(100), nullable=False)
     mobile_phase_a = db.Column(db.String(100), default=False)
     mobile_phase_b = db.Column(db.String(100), default=False)
+    date = db.Column(db.Date, nullable=False)
 
     user = db.relationship('User', backref=db.backref('usage_entries', lazy=True))
     column = db.relationship('ColumnInfo', backref=db.backref('usage_entries', lazy=True))

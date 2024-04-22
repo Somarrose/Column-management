@@ -1,0 +1,34 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<h1 class="text-dark">Last Usage Entries</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>User</th>
+                <th>Project</th>
+                <th>Technique</th>
+                <th>Mobile Phase A</th>
+                <th>Mobile Phase B</th>
+                <th>date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usage_entry in last_usage_entries %}
+            <tr>
+                <td>{{ usage_entry.column.reference }}</td>
+                <td>{{ usage_entry.user.name }}</td>
+                <td>{{ usage_entry.project }}</td>
+                <td>{{ usage_entry.technique }}</td>
+                <td>{{ usage_entry.mobile_phase_a }}</td>
+                <td>{{ usage_entry.mobile_phase_b }}</td>
+                <td>{{ usage_entry.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock content %}

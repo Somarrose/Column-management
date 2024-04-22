@@ -8,18 +8,34 @@
         <thead>
             <tr>
                 <th>Serial Number</th>
+                <th>Reference</th>
                 <th>Supplier</th>
                 <th>Dimension</th>
-                <th>Date</th>
             </tr>
         </thead>
         <tbody>
             {% for column in columns %}
             <tr>
-                <td>{{ column.sn }}</td>
-                <td>{{ column.supplier }}</td>
-                <td>{{ column.dimension }}</td>
-                <td>{{ column.date }}</td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    {{ column.sn }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    {{ column.reference }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    {{ column.supplier }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    {{ column.dimension }}
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

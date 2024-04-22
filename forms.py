@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
 from models import User, ColumnInfo
+from app import app
 
 
 class UserForm(FlaskForm):
@@ -18,9 +19,9 @@ class UserForm(FlaskForm):
 
 class ColumnInfoForm(FlaskForm):
     sn = StringField('Serial Number', validators=[DataRequired(), Length(max=50)])
+    reference = StringField('Reference', validators=[DataRequired(), Length(max=50)])
     supplier = StringField('Supplier', validators=[DataRequired(), Length(max=100)])
     dimension = StringField('Dimension', validators=[DataRequired(), Length(max=100)])
-    date = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit')
     def validate_sn(self, field):
         if field.data:
@@ -37,4 +38,5 @@ class UsageEntryForm(FlaskForm):
     technique = StringField('Technique', validators=[DataRequired(), Length(max=100)])
     mobile_phase_a = StringField('Mobile Phase A', validators=[DataRequired(), Length(max=100)])
     mobile_phase_b = StringField('Mobile Phase B', validators=[DataRequired(), Length(max=100)])
+    date = DateField('Date', validators=[DataRequired()])
     submit = SubmitField('Submit')

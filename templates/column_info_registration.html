@@ -7,15 +7,15 @@
         </div>
 
         <div>
+            {{ printPlaceholder(form.reference) }}
+        </div>
+
+        <div>
             {{ printPlaceholder(form.supplier) }}
         </div>
 
         <div>
             {{ printPlaceholder(form.dimension) }}
-        </div>
-
-        <div>
-            {{ printPlaceholder(form.date) }}
         </div>
 
         {{ form.submit(class_="btn  btn-primary mt-4") }}

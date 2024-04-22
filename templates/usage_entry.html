@@ -31,7 +31,11 @@
             {{ printPlaceholder(form.mobile_phase_b) }}
         </div>
 
-        {{ form.submit(class_="btn  btn-primary") }}
+        <div>
+            {{ printPlaceholder(form.date) }}
+        </div>
+
+        {{ form.submit(class_="btn mt-3 btn-primary") }}
     </form>
 
 {% endblock content %}
