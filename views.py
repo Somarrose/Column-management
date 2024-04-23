@@ -65,10 +65,9 @@ def registration():
         reference = form.reference.data
         supplier = form.supplier.data
         dimension = form.dimension.data
-        date = form.date.data
 
         # Create a new ColumnInfo object and add it to the database
-        column_info = ColumnInfo(sn=sn, reference=reference, supplier=supplier, dimension=dimension, date=date)
+        column_info = ColumnInfo(sn=sn, reference=reference, supplier=supplier, dimension=dimension)
         db.session.add(column_info)
         db.session.commit()
 
@@ -85,15 +84,6 @@ def product_details():
     columns = ColumnInfo.query.all()
     return render_template('product_details.html', columns=columns)
 
-# @app.route('/last_product_usage')
-# def last_product_usage():
-#     # Query the last usage entry for each column
-#     last_usages = []
-#     for column in ColumnInfo.query.all():
-#         last_usage = UsageEntry.query.filter_by(column_id=column.sn).order_by(UsageEntry.id.desc()).first()
-#         if last_usage:
-#             last_usages.append(last_usage)
-#     return render_template('last_product_usage.html', last_usages=last_usages)
 
 @app.route('/product_last_usage', defaults={'column_id': None})
 @app.route('/product_last_usage/<string:column_id>')
