@@ -31,10 +31,12 @@ def usage_entry():
             date = date
         )
         db.session.add(usage_entry)
+        db.session.flush()
+        id_= usage_entry.id
         db.session.commit()
         # Redirect to a success page or another route
         flash('Usage Entry Successful!', 'success')
-        return redirect( url_for('product_last_usage', column_id=column_id) )
+        return redirect( url_for('product_last_usage', id=id_) )
     return render_template('usage_entry.html', form=form)
     
 @app.route('/', methods=['GET', 'POST'])
@@ -106,13 +108,13 @@ def product_details(column_id):
         return render_template('product_details.html', columns=columns)
 
 
-@app.route('/product_last_usage', defaults={'column_id': None})
-@app.route('/product_last_usage/<string:column_id>')
-def product_last_usage(column_id):
+@app.route('/product_last_usage', defaults={'id': None})
+@app.route('/product_last_usage/<int:id>')
+def product_last_usage(id):
     last_usage=[]
-    if column_id:
+    if id:
         # Query last usage of the product from the database
-        last_usage.append(UsageEntry.query.filter_by(column_id=column_id).order_by(UsageEntry.date.desc()).first())
+        last_usage.append(UsageEntry.query.get(id))
         # Render template to display last usage of the product
         print(last_usage)
         return render_template('last_product_entry.html', usage=last_usage)

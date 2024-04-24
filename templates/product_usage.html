@@ -23,12 +23,36 @@
             {% for u in usage %}
             {% if u is defined and u %}
             <tr>                   
-                <td>{{ u.column.reference }}</td>
-                <td>{{ u.project }}</td>
-                <td>{{ u.technique }}</td>
-                <td>{{ u.mobile_phase_a }}</td>
-                <td>{{ u.mobile_phase_b }}</td>
-                <td>{{ u.date }}</td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.column.reference }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.project }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.technique }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.mobile_phase_a }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.mobile_phase_b }}
+                    </a>
+                </td>
+                <td>
+                    <a class="text-dark" href="{{ url_for('product_last_usage', id=u.id) }}">
+                    {{ u.date }}
+                    </a>
+                </td>
             </tr>
             {% endif %}
             {% endfor %}
