@@ -17,22 +17,22 @@
             {% for column in columns %}
             <tr>
                 <td>
-                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    <a class="text-dark" href="{{ url_for('product_usage', column_id=column.sn) }}">
                     {{ column.sn }}
                     </a>
                 </td>
                 <td>
-                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    <a class="text-dark" href="{{ url_for('product_usage', column_id=column.sn) }}">
                     {{ column.reference }}
                     </a>
                 </td>
                 <td>
-                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    <a class="text-dark" href="{{ url_for('product_usage', column_id=column.sn) }}">
                     {{ column.supplier }}
                     </a>
                 </td>
                 <td>
-                    <a class="text-dark" href="{{ url_for('product_last_usage', column_id=column.sn) }}">
+                    <a class="text-dark" href="{{ url_for('product_usage', column_id=column.sn) }}">
                     {{ column.dimension }}
                     </a>
                 </td>

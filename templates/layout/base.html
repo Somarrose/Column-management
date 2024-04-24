@@ -8,6 +8,7 @@
 
     <!-- Fontawesome -->
     <link type="text/css" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/slim-select/slimselect.css" rel="stylesheet">
 
     <!-- Pixel CSS -->
     <link type="text/css" href="/static/assets/css/pixel.css" rel="stylesheet">
@@ -47,7 +48,12 @@
       </div>
     </div>
   </main>
+  
   {% include 'includes/scripts.html' %}
+  
+  {% block javascripts %}
+  <script></script>
+  {% endblock javascripts %}
 
 </body>
 </html>

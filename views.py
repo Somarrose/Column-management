@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, jsonify
 from app import app, db
 from models import User, ColumnInfo, UsageEntry
 from forms import UsageEntryForm, UserForm, ColumnInfoForm
@@ -78,6 +78,18 @@ def registration():
     return render_template('Registration.html', Userform=Userform, form=form)
 
 
+@app.route('/get_product_columns')
+def get_product_columns():
+     # Query all column values from the database
+    columns = ColumnInfo.query.all()
+
+    # Serialize the data into JSON format
+    column_values = [{'sn': column.sn, 'reference': column.reference, 'supplier': column.supplier, 'dimension': column.dimension} for column in columns]
+
+    # Return the JSON response
+    return jsonify(column_values)
+
+
 @app.route('/product_details')
 def product_details():
     # Query all column information from the database
@@ -88,18 +100,28 @@ def product_details():
 @app.route('/product_last_usage', defaults={'column_id': None})
 @app.route('/product_last_usage/<string:column_id>')
 def product_last_usage(column_id):
+    last_usage=[]
     if column_id:
         # Query last usage of the product from the database
-        last_usage = UsageEntry.query.filter_by(column_id=column_id).order_by(UsageEntry.date.desc()).first()
+        last_usage.append(UsageEntry.query.filter_by(column_id=column_id).order_by(UsageEntry.date.desc()).first())
         # Render template to display last usage of the product
-        return render_template('last_product_usage.html', usage=last_usage)
+        print(last_usage)
+        return render_template('last_product_entry.html', usage=last_usage)
     else:
-        last_usage_entries = []
-        columns = ColumnInfo.query.all()
-        for column in columns:
-            last_usage_entry = UsageEntry.query.filter_by(column_id=column.sn).order_by(UsageEntry.date.desc()).first()
-            if last_usage_entry:
-                last_usage_entries.append(last_usage_entry)
-        print(last_usage_entries)
-        return render_template('last_usage_entries.html', last_usage_entries=last_usage_entries)
-       
+        return render_template('last_product_entry.html', usage = [])
+
+
+@app.route('/product_usage', defaults={'column_id': None})
+@app.route('/product_usage/<string:column_id>')
+def product_usage(column_id):
+    last_usage=[]
+    if column_id:
+        # Query last usage of the product from the database
+        last_usage=UsageEntry.query.filter_by(column_id=column_id).order_by(UsageEntry.date.desc()).all()
+        # Render template to display last usage of the product
+        print(last_usage)
+        return render_template('product_usage.html', usage=last_usage)
+    else:
+        return render_template('product_usage.html', usage = [])
+
+    
