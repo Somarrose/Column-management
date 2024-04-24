@@ -90,11 +90,20 @@ def get_product_columns():
     return jsonify(column_values)
 
 
-@app.route('/product_details')
-def product_details():
+@app.route('/product_details', defaults={'column_id': None})
+@app.route('/product_details/<string:column_id>')
+def product_details(column_id):
     # Query all column information from the database
-    columns = ColumnInfo.query.all()
-    return render_template('product_details.html', columns=columns)
+    products=[]
+    if column_id: 
+        columns = ColumnInfo.query.filter_by(sn=column_id).first()
+        products.append(columns)
+        return render_template('product_details.html', columns=products)
+    else:
+        columns = ColumnInfo.query.all()
+        products.append(columns)
+        print(products)
+        return render_template('product_details.html', columns=columns)
 
 
 @app.route('/product_last_usage', defaults={'column_id': None})
@@ -108,6 +117,7 @@ def product_last_usage(column_id):
         print(last_usage)
         return render_template('last_product_entry.html', usage=last_usage)
     else:
+        print(last_usage)
         return render_template('last_product_entry.html', usage = [])
 
 

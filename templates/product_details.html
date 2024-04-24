@@ -3,7 +3,11 @@
 
 {% block content %}
 
-<h1 class="text-dark">Product Details</h1>
+<select style="width:20%;" id="single">
+</select>
+
+<h1 class="mt-4 text-dark">Product Details</h1>
+<div id="select_content">
     <table class="table">
         <thead>
             <tr>
@@ -40,4 +44,63 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock content %}
+
+{% block javascripts %}
+{{ super() }}
+
+<script>
+    var select = new SlimSelect({
+        select: '#single',
+        settings: {
+          hideSelected: false,
+        }
+      })
+
+    $(document).ready(function()
+    {
+        $.get('/get_product_columns', function(data) {  // Shorthand for AJAX GET request
+            // Store the JSON data in a JavaScript object
+            var columnData = data;
+            //var selectField = $("#single");
+            // You can now use the 'columnData' object to access the JSON data
+            console.log(columnData);
+            options=[];
+            options.push({'placeholder': true, 'text': 'Select Product'})
+            for (var i = 0; i < columnData.length; i++) {
+                  var option =  {
+                  text: columnData[i].reference,
+                  value: columnData[i].sn,
+                };
+                options.push(option);
+            }
+            select.setData(options);
+        });
+        //    select.setData([
+        //    {text: 'Value 1', value: 'value1'},
+        //    {text: 'Value 2', value: 'value2'}])
+        $("#single").change(function() {
+            var values = select.getSelected(); // Will return an array of strings
+            //console.log(values);
+            if(values == "Select Product")
+            {
+                //pass
+            }
+            else{
+                $.get("/product_details/".concat(values))
+                .done(function(response) {
+                // Find the specific div within the response
+                var content = $(response).find("#select_content");
+
+                // Replace the content of an element with id "select_content" with the response
+                $("#select_content").replaceWith(content);
+            })
+        }
+        });  
+
+    })
+
+</script>
+
+{% endblock javascripts %}

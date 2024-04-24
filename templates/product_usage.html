@@ -7,34 +7,34 @@
 </select>
 
 <h1 class="mt-4 text-dark">Product Usage</h1>
-    <div id="select_content">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Project</th>
-                    <th>Technique</th>
-                    <th>Mobile Phase A</th>
-                    <th>Mobile Phase B</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for u in usage %}
-                {% if u is defined and u %}
-                <tr>                   
-                    <td>{{ u.column.reference }}</td>
-                    <td>{{ u.project }}</td>
-                    <td>{{ u.technique }}</td>
-                    <td>{{ u.mobile_phase_a }}</td>
-                    <td>{{ u.mobile_phase_b }}</td>
-                    <td>{{ u.date }}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<div id="select_content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Project</th>
+                <th>Technique</th>
+                <th>Mobile Phase A</th>
+                <th>Mobile Phase B</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in usage %}
+            {% if u is defined and u %}
+            <tr>                   
+                <td>{{ u.column.reference }}</td>
+                <td>{{ u.project }}</td>
+                <td>{{ u.technique }}</td>
+                <td>{{ u.mobile_phase_a }}</td>
+                <td>{{ u.mobile_phase_b }}</td>
+                <td>{{ u.date }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}
 

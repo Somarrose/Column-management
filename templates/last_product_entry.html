@@ -3,36 +3,60 @@
 
 {% block content %}
 
-<select style="width:20%;" id="single">
-</select>
-
 <h1 class="mt-4 text-dark">Last Usage</h1>
     <div id="select_content">
         <table class="table">
-            <thead>
+            <tbody>
+                {% for u in usage %}
                 <tr>
                     <th>Product</th>
-                    <th>Project</th>
-                    <th>Technique</th>
-                    <th>Mobile Phase A</th>
-                    <th>Mobile Phase B</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {% for u in usage %}
                     {% if u is defined and u %}
                     <td>{{ u.column.reference }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>User</th>
+                    {% if u is defined and u %}
+                    <td>{{ u.user.name }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Employee ID</th>
+                    {% if u is defined and u %}
+                    <td>{{ u.user.employee_id }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Project</th>
+                    {% if u is defined and u %}
                     <td>{{ u.project }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Technique</th>
+                    {% if u is defined and u %}
                     <td>{{ u.technique }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Mobile Phase A</th>
+                    {% if u is defined and u %}
                     <td>{{ u.mobile_phase_a }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Mobile Phase B</th>
+                    {% if u is defined and u %}
                     <td>{{ u.mobile_phase_b }}</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    {% if u is defined and u %}
                     <td>{{ u.date }}</td>
                     {% endif %}
-                    {% endfor %}
                 </tr>
-            </tbody>
+                {% endfor %}
         </table>
     </div>
 
@@ -42,12 +66,6 @@
 {{ super() }}
 
 <script>
-    var select = new SlimSelect({
-        select: '#single',
-        settings: {
-          hideSelected: false,
-        }
-      })
 
     $(document).ready(function()
     {
