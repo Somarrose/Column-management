@@ -1,3 +1,4 @@
 streamlit
 pandas
-pg8000
+SQLAlchemy
+psycopg2-binary

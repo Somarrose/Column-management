@@ -1,12 +1,12 @@
 import streamlit as st
 import pandas as pd
-import pg8000
+from sqlalchemy import create_engine
 import os
 # PostgreSQL Connection
 DB_URL = os.getenv("postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway")
 try:
-   conn = pg8000.connect(DB_URL)
-   cursor = conn.cursor()
+   engine = create_engine(DB_URL)
+   conn = engine.connect()
    st.success("✅ Connected to PostgreSQL successfully!")
 except Exception as e:
    st.error(f"❌ Database connection failed: {e}")
