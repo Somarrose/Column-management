@@ -1,4 +1,5 @@
 import streamlit as st
+st.cache_data.clear()
 import pandas as pd
 from sqlalchemy import create_engine
 import os
