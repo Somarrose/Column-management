@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 import psycopg2
 import os
-# PostgreSQL Connection URL (Replace with your Railway PostgreSQL URL)
+# PostgreSQL Connection URL (Replace with your actual database URL)
 DB_URL = os.getenv("DATABASE_URL", "postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway")
-# Connect to PostgreSQL
 try:
    conn = psycopg2.connect(DB_URL)
    cursor = conn.cursor()
    st.success("✅ Connected to PostgreSQL successfully!")
 except Exception as e:
    st.error(f"❌ Database connection failed: {e}")
+
 # Streamlit App UI
 st.title("📊 Analytical Column Management")
 # Sidebar Navigation
