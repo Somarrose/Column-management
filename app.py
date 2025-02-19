@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import pg8000
 import os
-# PostgreSQL Connection URL (postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway)
-DB_URL = os.getenv("DATABASE_URL")
+# PostgreSQL Connection
+DB_URL = os.getenv("postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway")
 try:
    conn = pg8000.connect(DB_URL)
    cursor = conn.cursor()
