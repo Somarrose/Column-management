@@ -1,15 +1,16 @@
 import streamlit as st
 import pandas as pd
-import psycopg2
+import pg8000
 import os
-# PostgreSQL Connection URL (Replace with your actual database URL)
-DB_URL = os.getenv("DATABASE_URL", "postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway")
+# PostgreSQL Connection URL (postgresql://postgres:rNJmKluuNByIxizCMxMzGlsaqqhxnwXo@shinkansen.proxy.rlwy.net:11248/railway)
+DB_URL = os.getenv("DATABASE_URL")
 try:
-   conn = psycopg2.connect(DB_URL)
+   conn = pg8000.connect(DB_URL)
    cursor = conn.cursor()
    st.success("✅ Connected to PostgreSQL successfully!")
 except Exception as e:
    st.error(f"❌ Database connection failed: {e}")
+
 
 # Streamlit App UI
 st.title("📊 Analytical Column Management")
